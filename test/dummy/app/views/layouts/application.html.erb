@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dummy</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag "let_me_in/application" %>
+  <%= stylesheet_link_tag "navel_gazer/application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+<%= yield %>
+
+<%= javascript_include_tag "application" %>
+<%= javascript_include_tag "let_me_in/application" %>
+<%= javascript_include_tag "navel_gazer/application" %>
+</body>
+</html>

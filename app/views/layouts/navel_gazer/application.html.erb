@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <%= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "let_me_in/application" %>
+  <%= stylesheet_link_tag "navel_gazer/application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container">
+    <%= yield %>
+  </div>
+  
+  <script type='text/javascript'>
+    preloaded_data = <%= @response.to_json.html_safe %>;
+  </script>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "let_me_in/application" %>
+  <%= javascript_include_tag "navel_gazer/application" %>
+  <%= yield :js_ready %>
+</body>
+</html>

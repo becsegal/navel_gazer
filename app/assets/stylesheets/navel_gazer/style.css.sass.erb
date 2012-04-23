@@ -1,0 +1,125 @@
+*
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+  box-sizing: border-box
+
+body
+  background-color: #EEE
+  
+#load_posts
+  width: 100%
+  margin: 15px 0
+  
+.invisible
+  visibility: hidden
+  
+.left
+  float: left
+  
+.clear
+  clear: both 
+  
+.post
+  width: 380px
+  background: white
+  cursor: pointer
+  margin: 10px
+  padding: 0
+  float: left
+  border: 1px solid #DDD
+  -webkit-border-radius: 4px
+  -moz-border-radius: 4px
+  border-radius: 4px
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075)
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075)
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075)
+  
+  .media
+    padding-top: 5px
+    padding-left: 5px
+    width: 370px
+    overflow-x: hidden
+    
+  .content
+    padding: 5px 5px 10px 5px
+    font-size: 14px
+  
+  .meta
+    background-color: white
+    border-bottom: 1px dotted #DDD
+    -webkit-border-top-left-radius: 4px
+    -webkit-border-top-right-radius: 4px
+    -moz-border-radius-topleft: 4px
+    -moz-border-radius-topright: 4px
+    border-top-left-radius: 4px
+    border-top-right-radius: 4px
+    padding: 5px
+    
+    .logo
+      width: 30px
+      height: 30px 
+      margin-right: 5px
+      float: left
+      background-repeat: no-repeat
+    .source
+      float: left
+      line-height: 30px
+    .about
+      color: #AAA
+      float: right
+      line-height: 30px
+      a, a:hover
+        color: #AAA
+        text-decoration: none
+
+.post:hover
+  border-color: #0088cc
+  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25)
+  -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25)
+  box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25)
+  
+
+.twitter_post
+  .meta
+    .logo
+      background-image: url("<%= asset_path 'twitter_icon.png' %>")
+      background-position: 0 -1px
+
+.instagram_post
+  .meta
+    .logo
+      background-image: url("<%= asset_path 'instagram_icon.png' %>")
+      background-position: 2px 2px
+
+.banters_post
+  .media
+    width: 378px
+    padding-left: 0px
+  .meta
+    .logo
+      background-image: url("<%= asset_path 'banters_icon.png' %>")
+      background-position: 0 3px
+  
+.about_post
+  padding: 5px
+  background: #DDD
+  cursor: default
+  img
+    float: left
+    margin-right: 10px
+    width: 150px
+  h1
+    float: left
+  .short_desc
+    float: left
+    width: 200px
+    margin-top: 10px
+    font-size: 1.1em
+  .long_desc
+    margin-top: 10px
+
+.post.about_post:hover
+  border-color: #DDD
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075)
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075)
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075)
