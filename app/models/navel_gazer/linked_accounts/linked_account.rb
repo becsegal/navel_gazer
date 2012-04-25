@@ -1,16 +1,8 @@
 module NavelGazer
-  module LinkedAccount
-  
-    def self.included(base)
-      base.extend(ClassMethods)
-    end
-  
-    module ClassMethods
+  class LinkedAccount < LetMeIn::LinkedAccount
+    set_table_name :linked_accounts
     
-      def has_many_posts
-        has_many :posts, :order => "source_id+0 DESC"
-      end
-    end
+    has_many :posts, :order => "source_id+0 DESC"
   
     def serializable_hash options={}
       hash = super :only => [:id, :app_user_id, :app_username, :image_url, :url, :user_id]

@@ -1,17 +1,15 @@
 
 Rails.application.config.middleware.use OmniAuth::Builder do
-  puts "omniauth.rb"
-  if Banters.available?
-    puts "banters available"
-    provider :banters, Banters.key, Banters.secret 
+  if LetMeIn::Banters.available?
+    provider :banters, LetMeIn::Banters.key, LetMeIn::Banters.secret, :name => "banters" 
   end
   
-  if Instagram.available?
-    provider :instagram, Instagram.key, Instagram.secret, :display => 'touch'
+  if LetMeIn::Instagram.available?
+    provider :instagram, LetMeIn::Instagram.key, LetMeIn::Instagram.secret, :display => 'touch', :name => "instagram"
   end
   
-  if Twitter.available?
-    provider :twitter, Twitter.key, Twitter.secret 
+  if LetMeIn::Twitter.available?
+    provider :twitter, LetMeIn::Twitter.key, LetMeIn::Twitter.secret, :name => "twitter"
   end
   
   provider :identity, :fields => [:username, :email], :model => LetMeIn::User, 

@@ -1,9 +1,8 @@
 module NavelGazer
-  class Banters < LetMeIn::Banters
+  class Banters < LinkedAccount
     include NavelGazer::LinkedAccount
-  
-    has_many_posts
-  
+    include LetMeIn::LinkedAccounts::Banters
+
     def import options={}
       return nil if token.nil?
       options ||= {}
@@ -19,7 +18,7 @@ module NavelGazer
       Media.fetch_for_posts(posts)
       posts.count
     end
-  
+
 
     def parse_data data
       response = []
@@ -36,6 +35,6 @@ module NavelGazer
       end
       response
     end
-  
+
   end
 end
