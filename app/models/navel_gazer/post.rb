@@ -24,7 +24,7 @@ module NavelGazer
   
     # Switch to STI?
     def links
-      case linked_account.class.name
+      case linked_account.class.short_name
       when "Twitter"
         content.links
       when "Banters"

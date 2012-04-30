@@ -3,18 +3,18 @@ module NavelGazer
     set_table_name :media
     
     belongs_to :post
-  
+    
     def self.fetch_for_posts posts=[]
       embedly_api = Embedly::API.new :key => ENV['EMBEDLY_KEY']
-    
+      
       posts.each do |post|
-        links = post.links
-        next if links.empty?
+        links = post.links if post
+        next if links.nil? || links.empty?
         objs = embedly_api.oembed(
           :urls => links,
           :maxWidth => 300
         )
-      
+        
         objs.collect{|o| o.marshal_dump}.each do |obj|
           next if obj[:type] == 'error'
          media = Media.find_or_initialize_by_post_id(:post_id => post.id)

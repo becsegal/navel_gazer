@@ -1,16 +1,13 @@
 module NavelGazer
-  class LinkedAccount < LetMeIn::LinkedAccount
+  class LinkedAccount < ActiveRecord::Base
+    include LetMeIn::LinkedAccounts::Account
+    
     set_table_name :linked_accounts
     
+    belongs_to_user
+    
     has_many :posts, :order => "source_id+0 DESC"
-  
-    def serializable_hash options={}
-      hash = super :only => [:id, :app_user_id, :app_username, :image_url, :url, :user_id]
-      hash[:type] = type.downcase
-      hash[:connected] = token?
-      hash
-    end
-  
+    
     def import_backlog
       last_post = posts.last
       before_id = last_post ? last_post.source_id : nil
@@ -24,10 +21,9 @@ module NavelGazer
         before_id = last_post ? last_post.source_id : nil
       end
     end
-  
+    
     def import options={}
       false
     end
-  
   end
 end

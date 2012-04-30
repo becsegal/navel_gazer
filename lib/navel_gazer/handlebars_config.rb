@@ -10,10 +10,7 @@ module NavelGazer
     end
 
     def self.register_partials
-      Rails.logger.debug "REGISTER PARTIALS"
       path = File.expand_path("../../../app/assets/templates/navel_gazer", __FILE__)
-      Rails.logger.debug "registering posts: #{path}/posts/_posts.jst.hbs"
-      Rails.logger.debug "registering post: #{path}/posts/_post.jst.hbs"
       register_partial("posts", "#{path}/posts/_posts.jst.hbs")
       register_partial("post", "#{path}/posts/_post.jst.hbs")
     end

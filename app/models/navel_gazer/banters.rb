@@ -1,7 +1,9 @@
 module NavelGazer
   class Banters < LinkedAccount
-    include NavelGazer::LinkedAccount
     include LetMeIn::LinkedAccounts::Banters
+      
+    DEV_URL = "https://banters.com/api/doc"
+    API_URL = "https://banters.com/"
 
     def import options={}
       return nil if token.nil?
@@ -19,7 +21,6 @@ module NavelGazer
       posts.count
     end
 
-
     def parse_data data
       response = []
       data['collection'].each do |item|
@@ -35,6 +36,5 @@ module NavelGazer
       end
       response
     end
-
   end
 end

@@ -1,7 +1,9 @@
 module NavelGazer
   class Engine < Rails::Engine
     paths["app/views"] << "app/assets/templates/navel_gazer"
-    config.autoload_paths << File.expand_path("./ext/", __FILE__)
+    config.autoload_paths << dir = File.expand_path("../ext/", __FILE__)
+    puts config.autoload_paths
+    Dir[File.join(dir, "*.rb")].each {|l| require l }
   end
   
   # hack from http://tumblr.teamon.eu/post/898063470/better-scoped-rails-engines-routing
