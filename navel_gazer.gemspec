@@ -7,11 +7,11 @@ require "navel_gazer/version"
 Gem::Specification.new do |s|
   s.name        = "navel_gazer"
   s.version     = NavelGazer::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of NavelGazer."
-  s.description = "TODO: Description of NavelGazer."
+  s.authors     = ["Becky Carella"]
+  s.email       = ["becarella@gmail.com"]
+  s.homepage    = "https://github.com/becarella/navel_gazer"
+  s.summary     = "Import and display posts from misc social media sites."
+  s.description = "Import and display posts from misc social media sites."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
