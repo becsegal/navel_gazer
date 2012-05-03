@@ -1,6 +1,6 @@
 module NavelGazer
   class Banters < LinkedAccount
-    include LetMeIn::LinkedAccounts::Banters
+    include LetMeIn::LinkedAccounts::BantersAccount
       
     DEV_URL = "https://banters.com/api/doc"
     API_URL = "https://banters.com/"

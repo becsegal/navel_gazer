@@ -1,6 +1,6 @@
 module NavelGazer
   class Instagram < LinkedAccount
-    include LetMeIn::LinkedAccounts::Instagram
+    include LetMeIn::LinkedAccounts::InstagramAccount
 
     DEV_URL = "http://instagr.am/developer/"
     API_URL = "https://api.instagram.com"
