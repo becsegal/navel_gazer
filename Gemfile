@@ -19,8 +19,8 @@ gem 'omniauth-instagram'
 gem 'omniauth-twitter', '0.0.8'
 gem 'omniauth-banters', :git => "git://github.com/becarella/omniauth-banters.git"
 
-gem "render_or_redirect", :path => "../render_or_redirect"
-gem "let_me_in", :path => "../let_me_in"
+gem 'let_me_in', :git => 'git@github.com:becarella/let_me_in.git'
+gem 'render_or_redirect', :git => 'git@github.com:becarella/render_or_redirect.git'
 
 gem 'hbs'
 gem 'handlebars_assets'
