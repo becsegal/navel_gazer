@@ -10,9 +10,7 @@ module NavelGazer
     # Import tweets. Convert options to request parameters. 
     # See https://dev.twitter.com/docs/api/1/get/statuses/user_timeline for options
     def import options={}
-      puts "Twitter.import"
       return nil if token.nil? || secret.nil?
-      puts "Twitter.import continue"
       options ||= {}
       if !options.has_key?(:since_id) && !options.has_key?(:before_id)
         last_post = posts.last
@@ -20,16 +18,13 @@ module NavelGazer
         options[:count] = 20
       end
       options[:max_id] = options.delete(:before_id) if options.has_key?(:before_id)
-      puts "options: #{options.inspect}"
       data = JSON.parse(access_token.get("/1/statuses/user_timeline.json?#{options.to_param}").body)
-      puts "data: #{data.inspect}"
       if data.is_a?(Hash) && data['error']
         update_attributes(:secret => nil, :token => nil)
         logger.error "ERROR IMPORTING FROM TWITTER: #{data.inspect}"
         return nil
       end
       new_items = parse_data(data)
-      puts "new items: #{new_items.inspect}"
       Media.fetch_for_posts(new_items)
       new_items.count
     end

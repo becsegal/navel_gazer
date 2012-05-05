@@ -4,6 +4,11 @@ module NavelGazer
 
     DEV_URL = "http://instagr.am/developer/"
     API_URL = "https://api.instagram.com"
+    
+    has_many :posts, 
+             :foreign_key => :linked_account_id,
+             :order => "source_id DESC"
+    
 
     def import options={}
       return nil if token.nil?

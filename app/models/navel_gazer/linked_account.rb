@@ -6,7 +6,7 @@ module NavelGazer
     
     belongs_to_user
     
-    has_many :posts, :order => "source_id+0 DESC"
+    has_many :posts, :order => "source_id::text::bigint DESC"
     
     def import_backlog
       last_post = posts.last

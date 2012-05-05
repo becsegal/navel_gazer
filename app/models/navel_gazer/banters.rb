@@ -24,7 +24,7 @@ module NavelGazer
     def parse_data data
       response = []
       data['collection'].each do |item|
-        post = posts.find_or_create_by_source_id(:source_id => item['id'])
+        post = posts.find_or_create_by_source_id(:source_id => item['id'].to_s)
         post.update_attributes!(
           :permalink => "https://banters.com/p/#{item['id']}",
           :activity_type => 'post',
