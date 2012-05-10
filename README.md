@@ -4,8 +4,10 @@ Create a new project
 '''rails g your-project-name'''
 
 Include navel_gazer in the Gemfile
+<pre>
   gem 'let_me_in', :git => 'git@github.com:becarella/let_me_in.git'
   gem 'navel_gazer', :git => 'git@github.com:becarella/navel_gazer.git'
+</pre>
 
 Register api keys for:
 * Banters (optional) https://banters.com/api/apps
@@ -31,11 +33,14 @@ To host on heroku, register a new application and install the keys. https://devc
 </pre>
 
 Install the database migrations into your projects:
+<pre>
   rake let_me_in_engine:install:migrations
   rake navel_gazer_engine:install:migrations
   rake db:migrate
+</pre>
   
 Add these routes to routes.rb
+<pre>
   root :to => 'navel_gazer/posts#index'
   match 'posts' => 'navel_gazer/posts#index'
   match 'signin' => 'let_me_in/sessions#new'
@@ -45,3 +50,4 @@ Add these routes to routes.rb
   match 'auth/:provider/callback' => 'let_me_in/auth#callback'
   match 'auth(/:provider)/failure' => 'let_me_in/auth#failure'
   match 'accounts' => 'let_me_in/linked_accounts#index'
+</pre>
