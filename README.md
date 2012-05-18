@@ -65,7 +65,7 @@ Add these routes to routes.rb
 
 Create the file app/models/user.rb:
 <pre>
-  class User < NavelGazer::User
+  class User &amp; NavelGazer::User
   
   end
 </pre>
