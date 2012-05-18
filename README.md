@@ -65,11 +65,11 @@ Add these routes to routes.rb
 
 Create the file app/models/user.rb:
 <pre>
-class User < NavelGazer::User
-end
+  class User < NavelGazer::User
+  end
 </pre>
 
 Run rails c and do:
 <pre>
-User.create(:username=>'USERNAME', :email=>'EMAIL', :password=>'PASSWORD', :password_confirmation=>'PASSWORD')
+  User.create(:username=>'USERNAME', :email=>'EMAIL', :password=>'PASSWORD', :password_confirmation=>'PASSWORD')
 </pre>
