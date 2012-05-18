@@ -5,6 +5,15 @@ Create a new project
 
 Include navel_gazer in the Gemfile
 <pre>
+  gem 'omniauth-identity'
+  gem 'omniauth-instagram'
+  gem 'omniauth-twitter', '0.0.8'
+  gem 'omniauth-banters', :git => "git://github.com/becarella/omniauth-banters.git"
+
+  gem 'hbs'
+  gem 'handlebars_assets'
+
+  gem "render_or_redirect", :git => 'git@github.com:becarella/render_or_redirect.git'
   gem 'let_me_in', :git => 'git@github.com:becarella/let_me_in.git'
   gem 'navel_gazer', :git => 'git@github.com:becarella/navel_gazer.git'
 </pre>
