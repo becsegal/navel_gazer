@@ -1,8 +1,6 @@
 module NavelGazer
   class User < OmniAuth::Identity::Models::ActiveRecord
     include LetMeIn::LinkedAccounts::Identity
-  
-    has_linked_accounts
     attr_accessible :name, :description
   
     def serializable_hash options={}

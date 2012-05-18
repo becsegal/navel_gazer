@@ -3,9 +3,7 @@ module NavelGazer
     include LetMeIn::LinkedAccounts::Account
     
     set_table_name :linked_accounts
-    
-    belongs_to_user
-    
+        
     has_many :posts, :order => "source_id::text::bigint DESC"
     
     def import_backlog
