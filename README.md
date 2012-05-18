@@ -5,6 +5,15 @@ Create a new project
 
 Include navel_gazer in the Gemfile
 <pre>
+  gem 'omniauth-identity'
+  gem 'omniauth-instagram'
+  gem 'omniauth-twitter', '0.0.8'
+  gem 'omniauth-banters', :git => "git://github.com/becarella/omniauth-banters.git"
+
+  gem 'hbs'
+  gem 'handlebars_assets'
+
+  gem "render_or_redirect", :git => 'git@github.com:becarella/render_or_redirect.git'
   gem 'let_me_in', :git => 'git@github.com:becarella/let_me_in.git'
   gem 'navel_gazer', :git => 'git@github.com:becarella/navel_gazer.git'
 </pre>
@@ -45,9 +54,10 @@ Add these routes to routes.rb
   match 'posts' => 'navel_gazer/posts#index'
   match 'signin' => 'let_me_in/sessions#new'
   match 'signout' => 'let_me_in/sessions#destroy'
-  match 'auth/:provider/connect' => "let_me_in/auth#connect"
-  match 'auth/:provider/disconnect' => 'let_me_in/auth#disconnect'
+  match 'auth/:provider/connect' => "let_me_in/auth#connect", :via => :get
+  match 'auth/:provider/:id' => 'let_me_in/auth#disconnect', :via => :delete
   match 'auth/:provider/callback' => 'let_me_in/auth#callback'
   match 'auth(/:provider)/failure' => 'let_me_in/auth#failure'
-  match 'accounts' => 'let_me_in/linked_accounts#index'
+  match 'accounts' => 'let_me_in/linked_accounts#index', :as => 'accounts'
+  match 'accounts' => 'let_me_in/linked_accounts#index', :as => 'post_login'
 </pre>
