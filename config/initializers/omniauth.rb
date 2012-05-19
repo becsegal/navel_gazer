@@ -17,6 +17,11 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     provider :banters, NavelGazer::Banters.key, NavelGazer::Banters.secret, :name => "banters" 
     LetMeIn::Engine.config.account_types << NavelGazer::Banters
   end
+
+  if NavelGazer::Foursquare.available?
+    provider :foursquare, NavelGazer::Foursquare.key, NavelGazer::Foursquare.secret, :name => "foursquare" 
+    LetMeIn::Engine.config.account_types << NavelGazer::Foursquare
+  end
   
   if NavelGazer::Instagram.available?
     provider :instagram, NavelGazer::Instagram.key, NavelGazer::Instagram.secret, :display => 'touch', :name => "instagram"
@@ -26,6 +31,11 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   if NavelGazer::Twitter.available?
     provider :twitter, NavelGazer::Twitter.key, NavelGazer::Twitter.secret, :name => "twitter"
     LetMeIn::Engine.config.account_types << NavelGazer::Twitter
+  end
+
+  if NavelGazer::Tumblr.available?
+    provider :tumblr, NavelGazer::Tumblr.key, NavelGazer::Tumblr.secret, :name => "tumblr"
+    LetMeIn::Engine.config.account_types << NavelGazer::Tumblr
   end
   
   provider :identity, :fields => [:username, :email], :model => NavelGazer::User, 

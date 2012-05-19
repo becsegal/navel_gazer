@@ -13,13 +13,16 @@ gem "jquery-rails"
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-
+gem 'pg'
 gem 'omniauth-identity'
 gem 'omniauth-instagram'
 gem 'omniauth-twitter', '0.0.8'
 gem 'omniauth-banters', :git => "git://github.com/becarella/omniauth-banters.git"
+gem 'omniauth-foursquare'
+gem 'omniauth-tumblr'
 
-gem 'let_me_in', :git => 'git@github.com:becarella/let_me_in.git'
+#gem 'let_me_in', :git => 'git@github.com:becarella/let_me_in.git'
+gem 'let_me_in', :path => '/Users/rbuskirk/src/let_me_in'
 gem 'render_or_redirect', :git => 'git@github.com:becarella/render_or_redirect.git'
 
 gem 'hbs'

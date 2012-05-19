@@ -4,7 +4,7 @@ module NavelGazer
     
     set_table_name :linked_accounts
         
-    has_many :posts, :order => "source_id::text::bigint DESC"
+    has_many :posts, :order => "source_created_at DESC"
     
     def import_backlog
       last_post = posts.last
