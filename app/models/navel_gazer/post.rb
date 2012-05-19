@@ -36,7 +36,7 @@ module NavelGazer
     end
     
     def self.grouped_by_day_and_type(options={})
-      dates = active_dates(options).sort
+      dates = active_dates(options)
       query = %Q{ SELECT max(id) as id, linked_account_id, date_trunc('day', source_created_at) AS pdate, count(*)
                   FROM posts
                   WHERE date_trunc('day', source_created_at) IN (?)
@@ -74,7 +74,7 @@ module NavelGazer
       limit = options[:limit] || Finders::DEFAULT_LIMIT
       query_array = [query, options[:since], options[:before], limit].compact!
       post_data = ActiveRecord::Base.raw_query_flat(query_array)
-      post_data.collect{|d| d['pdate']}
+      post_data.collect{|d| d['pdate']}.sort{|a,b| b <=> a}
     end
     
     def self.for_account_and_day(options={})

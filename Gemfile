@@ -23,8 +23,8 @@ gem 'omniauth-banters', :git => "git://github.com/becarella/omniauth-banters.git
 gem 'omniauth-foursquare'
 gem 'omniauth-tumblr'
 
-#gem 'let_me_in', :git => 'git@github.com:becarella/let_me_in.git'
-gem 'let_me_in', :path => '../let_me_in'
+gem 'let_me_in', :git => 'git@github.com:becarella/let_me_in.git'
+#gem 'let_me_in', :path => '../let_me_in'
 gem 'render_or_redirect', :git => 'git@github.com:becarella/render_or_redirect.git'
 
 gem 'hbs'
