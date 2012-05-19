@@ -43,3 +43,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       AuthController.action(:failure).call(env) 
     }
 end
+
+puts "omniauth.rb"
