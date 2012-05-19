@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root :to => 'navel_gazer/posts#index'
-  match 'posts' => 'navel_gazer/posts#index'
+  match 'posts(/:method)' => 'navel_gazer/posts#index'
   
   match 'signin' => 'let_me_in/sessions#new'
   match 'signout' => 'let_me_in/sessions#destroy'

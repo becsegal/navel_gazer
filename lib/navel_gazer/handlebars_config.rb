@@ -10,9 +10,10 @@ module NavelGazer
     end
 
     def self.register_partials
-      path = File.expand_path("../../../app/assets/templates/navel_gazer", __FILE__)
-      register_partial("posts", "#{path}/posts/_posts.jst.hbs")
-      register_partial("post", "#{path}/posts/_post.jst.hbs")
+      dir = File.expand_path("../../../app/assets/templates/navel_gazer", __FILE__)
+      Dir[File.join(dir, "**/*.jst.hbs")].each {|t| 
+        register_partial(t.split(/[\/\._]/)[-3], t)
+      }
     end
 
     def self.register_helpers 

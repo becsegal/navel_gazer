@@ -5,9 +5,9 @@
 #   gem 'sqlite3'
 development:
   adapter: postgresql
-  database: navel_gazer
-  username: rbuskirk
-  password:
+  database: lifelogline
+  username: postgres
+  password: postgres
   host: localhost
 
 # Warning: The database defined as "test" will be erased and

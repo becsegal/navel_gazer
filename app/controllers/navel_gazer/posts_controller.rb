@@ -1,11 +1,8 @@
 module NavelGazer
   class PostsController < ApplicationController
     def index
-      posts = NavelGazer::Post.includes(:linked_account, :photos)
-                  .order("source_created_at DESC")
-                  .limit((params[:limit] || 20).to_i)
-                  .offset((params[:offset] || 0).to_i)
-                  .all
+      method = params.delete(:method) || :grouped_by_day_and_type
+      posts = NavelGazer::Post.send(method, params)
       render_or_redirect posts
     end
   end

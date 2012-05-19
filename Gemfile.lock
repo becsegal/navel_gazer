@@ -21,12 +21,12 @@ PATH
       rest-client
 
 PATH
-  remote: /Users/rbuskirk/src/let_me_in
+  remote: ../let_me_in
   specs:
     let_me_in (0.0.1)
       bcrypt-ruby (~> 3.0.0)
       omniauth-identity
-      rails (~> 3.1.4)
+      rails
 
 GEM
   remote: http://rubygems.org/
