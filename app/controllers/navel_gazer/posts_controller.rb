@@ -6,7 +6,7 @@ module NavelGazer
       options = {}
       if request.xhr?
         @data = posts
-        render 'index_ajax', :layout => false
+        render "index_#{method}_ajax", :layout => false
       else
         render_or_redirect posts, options
       end
