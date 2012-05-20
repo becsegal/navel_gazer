@@ -6,15 +6,6 @@ GIT
       omniauth-oauth2 (~> 1.0.0)
 
 GIT
-  remote: git@github.com:becarella/let_me_in.git
-  revision: 210262108371603f4e3de4f9e7bd053504e9d597
-  specs:
-    let_me_in (0.0.1)
-      bcrypt-ruby (~> 3.0.0)
-      omniauth-identity
-      rails
-
-GIT
   remote: git@github.com:becarella/render_or_redirect.git
   revision: c9d0f2236e275950d7abd6dc2401975fdf84aa32
   specs:
@@ -28,6 +19,14 @@ PATH
       embedly
       rails
       rest-client
+
+PATH
+  remote: ../let_me_in
+  specs:
+    let_me_in (0.0.1)
+      bcrypt-ruby (~> 3.0.0)
+      omniauth-identity
+      rails
 
 GEM
   remote: http://rubygems.org/
@@ -118,6 +117,9 @@ GEM
     omniauth-instagram (1.0.0)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
+    omniauth-lastfm (0.0.2)
+      omniauth-oauth (~> 1.0)
+      rest-client (~> 1.6.6)
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
@@ -199,6 +201,7 @@ DEPENDENCIES
   omniauth-foursquare
   omniauth-identity
   omniauth-instagram
+  omniauth-lastfm
   omniauth-tumblr
   omniauth-twitter (= 0.0.8)
   pg

@@ -27,7 +27,6 @@ module NavelGazer
     def parse_data data
       response = []
       data['response']['checkins']['items'].each do |item|
-logger.debug item.inspect
         post = posts.find_or_create_by_source_id(:source_id => item['id'].to_s)
         post.update_attributes!(
           :permalink => "#{url}/checkin/#{item['id']}",

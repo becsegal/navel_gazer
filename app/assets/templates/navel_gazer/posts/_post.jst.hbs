@@ -7,17 +7,25 @@
     </div>
     <div class="clear"></div>
   </div>
-  <div class="media">
-    {{#photos}}
-      <div style='width: {{width}}px, height: {{height}}px'>
-        <img src='{{html}}' />
-      </div>
-    {{/photos}}
+  <div class="photos">
+    {{#if photos}}
+      {{#photos}}
+        <div style='width: {{width}}px, height: {{height}}px'>
+          <img src='{{html}}' />
+        </div>
+      {{/photos}}
+    {{else}}
+        {{#render_media}}
+          <div>
+            {{{html}}}
+          </div>
+        {{/render_media}}
+    {{/if}}
     <div class='clear'></div>
   </div>
   {{#if content}}
     <div class="content">
-      {{content}}
+      {{{content}}}
       <div class='clear'></div>
     </div>
   {{/if}}

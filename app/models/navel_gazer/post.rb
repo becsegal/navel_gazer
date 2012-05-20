@@ -12,16 +12,20 @@ module NavelGazer
     has_many :media, 
       :class_name => "Media",
       :dependent => :destroy
+
+    has_many :render_media,
+      :class_name => "Media",
+      :conditions => {:embed_type => ['audio','photo','video']}
+
     has_many :photos,
       :class_name => "Media",
       :conditions => {:embed_type => 'photo'}
-  
 
     validate :source_id, 
              :uniqueness => { :scope => :linked_account_id }
              
     def serializable_hash options = {}
-      hash = super (options || {}).merge(:include => [:linked_account, :photos])
+      hash = super (options || {}).merge(:include => [:linked_account, :render_media, :photos])
       hash[:source_created_at] = source_created_at.strftime("%b %e, %Y")
       hash[:additional_count] = additional_count if additional_count
       hash
