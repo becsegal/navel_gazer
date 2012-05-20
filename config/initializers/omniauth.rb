@@ -27,17 +27,22 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     provider :instagram, NavelGazer::Instagram.key, NavelGazer::Instagram.secret, :display => 'touch', :name => "instagram"
     LetMeIn::Engine.config.account_types << NavelGazer::Instagram
   end
+
+  if NavelGazer::Lastfm.available?
+    provider :lastfm, NavelGazer::Lastfm.key, NavelGazer::Lastfm.secret, :name => "lastfm"
+    LetMeIn::Engine.config.account_types << NavelGazer::Lastfm
+  end
   
+  if NavelGazer::Tumblr.available?
+    provider :tumblr, NavelGazer::Tumblr.key, NavelGazer::Tumblr.secret, :name => "tumblr"
+    LetMeIn::Engine.config.account_types << NavelGazer::Tumblr
+  end
+
   if NavelGazer::Twitter.available?
     provider :twitter, NavelGazer::Twitter.key, NavelGazer::Twitter.secret, :name => "twitter"
     LetMeIn::Engine.config.account_types << NavelGazer::Twitter
   end
 
-  if NavelGazer::Tumblr.available?
-    provider :tumblr, NavelGazer::Tumblr.key, NavelGazer::Tumblr.secret, :name => "tumblr"
-    LetMeIn::Engine.config.account_types << NavelGazer::Tumblr
-  end
-  
   provider :identity, :fields => [:username, :email], :model => NavelGazer::User, 
     :on_failed_registration => lambda { |env| 
       AuthController.action(:failure).call(env) 
