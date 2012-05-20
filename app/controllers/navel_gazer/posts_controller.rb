@@ -6,7 +6,6 @@ module NavelGazer
       options = {}
       if request.xhr?
         @data = posts
-        logger.debug "date: #{@data.inspect}"
         render 'index_ajax', :layout => false
       else
         render_or_redirect posts, options
