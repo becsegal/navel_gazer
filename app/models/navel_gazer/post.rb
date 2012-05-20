@@ -54,7 +54,7 @@ module NavelGazer
       posts_by_date = []
       dates.each do |d| 
         date = Date.parse(d.to_s)
-        entry = {:date => date.strftime('%Y-%m-%d')}
+        entry = {:date => date.strftime('%Y-%m-%d'), :pretty_date => date.strftime('%b %e, %Y')}
         dated_posts = posts.select do |p| 
           Date.parse(p['source_created_at'].midnight.to_s) == date
         end
