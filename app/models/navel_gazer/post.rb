@@ -46,18 +46,23 @@ module NavelGazer
               .where([ "id in (?)", post_data.collect{|p| p['id'].to_i} ])
               .order("source_created_at DESC, linked_account_id DESC")
               .all
-      posts.each do |p|
-        p.additional_count = post_data.select{|pd| pd['id'].to_i == p.id}[0]['count'].to_i - 1
-      end
       
       posts_by_date = []
       dates.each do |d| 
-        entry = {:date => d}
+        date = Date.parse(d.to_s)
+        entry = {:date => date.strftime('%Y-%m-%d')}
         dated_posts = posts.select do |p| 
-          Date.parse(p['source_created_at'].midnight.to_s) == Date.parse(d.to_s)
+          Date.parse(p['source_created_at'].midnight.to_s) == date
         end
         posts -= dated_posts
-        entry[:posts] = dated_posts
+        entry[:accounts] = []
+        dated_posts.each do |p|
+          count = post_data.select{|pd| pd['id'].to_i == p.id}[0]['count'].to_i - 1
+          entry[:accounts] << { :type => p.linked_account.class.short_name.downcase, 
+                                :linked_account_id => p.linked_account.id,
+                                :posts => p, 
+                                :additional_count => count}
+        end
         posts_by_date << entry
       end
       posts_by_date
@@ -68,6 +73,7 @@ module NavelGazer
       self.includes(:linked_account, :photos)
           .where(:linked_account_id => options[:linked_account_id].to_i)
           .where(["date_trunc('day', source_created_at) = ?", Date.parse(options[:date])])
+          .order('id DESC')
           .all
     end
     
