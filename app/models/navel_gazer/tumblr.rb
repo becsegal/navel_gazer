@@ -4,6 +4,8 @@ module NavelGazer
       
     DEV_URL = "https://www.tumblr.com/docs/en/api/v2"
     API_URL = "http://api.tumblr.com/v2"
+    PROVIDER_NAME = "Tumblr"
+    PROVIDER_URL = "http://www.tumblr.com"
     MIN_IMAGE_WIDTH = 250
 
     def import options={}
@@ -23,65 +25,98 @@ module NavelGazer
       posts.count
     end
 
+    # parse reaponse data and save posts 
     def parse_data data
       response = []
       data['response']['posts'].each do |item|
         post = posts.find_or_create_by_source_id(:source_id => item['id'].to_s)
         post.update_attributes!(
           :permalink => item['post_url'],
-          :activity_type => item['type'] == 'photo' ? 'photo' : 'text',
+          :activity_type => item['type'],
           :author_name => app_username,
           :author_image => image_url,
           :author_url => url,
           :source_created_at => DateTime.strptime(item['timestamp'].to_s, '%s'),
-          :content => get_content(item) #TODO clean
+          :content => get_content(item)
         )
 
-        if item['photos'] 
-          sizes = item['photos'][0]['alt_sizes'].sort! { |a,b| b['width'].to_i <=> a['width'].to_i } 
-          sizes = sizes.select { |a| a['width'].to_i >= MIN_IMAGE_WIDTH }
-            
-          media = Media.find_or_create_by_post_id(:post_id => post.id)
-          media.update_attributes(
-            :post_id => post.id,
-            :embed_type => 'photo',
-            :author_name => app_username,
-            :author_url => url,
-            :provider_name => 'Tumblr',
-            :provider_url => 'http://tumblr.com/',
-            :thumbnail_url => sizes.last['url'],
-            :thumbnail_width => sizes.last['width'],
-            :thumbnail_height => sizes.last['height'],
-            :description => item['photos'][0]['caption'],
-            :url => item['photos'][0]['original_size']['url'],
-            :width => item['photos'][0]['original_size']['width'],
-            :height => item['photos'][0]['original_size']['height'],
-            :html => sizes.last['url'])
-        end
+        create_media(item, post) 
 
         response << post
       end
       response
     end
 
+    # get main post content based on content type 
+    # might need to format 
     def get_content item
       case item['type'] 
-        when 'audio'
-          item['player']
         when 'chat'
           item['body']
+        when 'link'
+          url = item['url']
+          title = item['title']
+          "<a href='#{url}' target='_blank'>#{title}</a>"
         when 'photo'
           item['caption']
         when 'quote'
           "#{item['text']} #{item['source']}"
         when 'text'
           item['body']   
-        when 'video'
-          item['player'][0]['embed_code']
         else 
-          ""
+          nil 
       end  
-    
     end
+
+    # create media records for a post
+    # supported content types are 'auto', 'photo' and 'video'
+    def create_media(item, post)
+
+      case item['type'] 
+        when 'audio'
+           media = Media.find_or_create_by_post_id(:post_id => post.id)
+           media.update_attributes(
+            :post_id => post.id,
+            :embed_type => item['type'],
+            :author_name => app_username,
+            :author_url => url,
+            :provider_name => PROVIDER_NAME,
+            :provider_url => PROVIDER_URL,
+            :html => item['player'])
+        when 'photo'
+          if item['photos'] 
+            sizes = item['photos'][0]['alt_sizes'].sort! { |a,b| b['width'].to_i <=> a['width'].to_i } 
+            sizes = sizes.select { |a| a['width'].to_i >= MIN_IMAGE_WIDTH }
+               
+            media = Media.find_or_create_by_post_id(:post_id => post.id)
+            media.update_attributes(
+              :post_id => post.id,
+              :embed_type => item['type'],
+              :author_name => app_username,
+              :author_url => url,
+              :provider_name => PROVIDER_NAME,
+              :provider_url => PROVIDER_URL,
+              :thumbnail_url => sizes.last['url'],
+              :thumbnail_width => sizes.last['width'],
+              :thumbnail_height => sizes.last['height'],
+              :description => item['photos'][0]['caption'],
+              :url => item['photos'][0]['original_size']['url'],
+              :width => item['photos'][0]['original_size']['width'],
+              :height => item['photos'][0]['original_size']['height'],
+              :html => sizes.last['url'])
+          end
+        when 'video'
+          media = Media.find_or_create_by_post_id(:post_id => post.id)
+          media.update_attributes(
+            :post_id => post.id,
+            :embed_type => item['type'],
+            :author_name => app_username,
+            :author_url => url,
+            :provider_name => PROVIDER_NAME,
+            :provider_url => PROVIDER_URL,
+            :html => item['player'][0]['embed_code'])
+      end  
+    end
+
   end
 end
