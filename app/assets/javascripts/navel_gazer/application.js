@@ -6,4 +6,3 @@
 //
 //= require_tree ./../../templates/navel_gazer
 //= require_tree .
-

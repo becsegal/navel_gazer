@@ -30,8 +30,8 @@ module NavelGazer
     def self.ungrouped(options={})
       posts = includes(:linked_account, :photos)
               .order("source_created_at DESC")
-              .limit((params[:limit] || DEFAULT_LIMIT).to_i)
-              .offset((params[:offset] || 0).to_i)
+              .limit((options[:limit] || DEFAULT_LIMIT).to_i)
+              .offset((options[:offset] || 0).to_i)
               .all
     end
     

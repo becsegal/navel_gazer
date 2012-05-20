@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git@github.com:becarella/let_me_in.git
-  revision: 3e1f86cac2525859b201d0acd5b0b4e76e7545d8
+  revision: 210262108371603f4e3de4f9e7bd053504e9d597
   specs:
     let_me_in (0.0.1)
       bcrypt-ruby (~> 3.0.0)

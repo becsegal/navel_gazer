@@ -1,6 +1,6 @@
 <div id="posts" class='thumbnails'>
   <div class='post about_post'><%= about %></div>
-  <%= render :partial => 'posts/posts_by_date.jst', :locals => {:hbs =>  {:data => @data.as_json } } %>
+  <%= render :partial => 'posts/posts.jst', :locals => {:hbs =>  {:data => @data.as_json } } %>
 </div>
 <div class='clear' />
 
