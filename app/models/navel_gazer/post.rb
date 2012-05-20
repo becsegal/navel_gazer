@@ -7,7 +7,7 @@ module NavelGazer
     belongs_to :user
     belongs_to :linked_account
     
-    attr_accessor :count
+    attr_accessor :additional_count
   
     has_many :media, 
       :class_name => "Media",
@@ -23,7 +23,7 @@ module NavelGazer
     def serializable_hash options = {}
       hash = super (options || {}).merge(:include => [:linked_account, :photos])
       hash[:source_created_at] = source_created_at.strftime("%b %e, %Y")
-      hash[:count] = count if count
+      hash[:additional_count] = additional_count if additional_count
       hash
     end
     
@@ -47,7 +47,7 @@ module NavelGazer
               .order("source_created_at DESC, linked_account_id DESC")
               .all
       posts.each do |p|
-        p.count = post_data.select{|pd| pd['id'].to_i == p.id}[0]['count'].to_i
+        p.additional_count = post_data.select{|pd| pd['id'].to_i == p.id}[0]['count'].to_i - 1
       end
       
       posts_by_date = []
@@ -62,6 +62,14 @@ module NavelGazer
       end
       posts_by_date
     end
+
+    def self.by_account_and_date(options={})
+      return [] if options[:date].nil? || options[:linked_account_id].nil? || Date.parse(options[:date].to_s).nil?
+      self.includes(:linked_account, :photos)
+          .where(:linked_account_id => options[:linked_account_id].to_i)
+          .where(["date_trunc('day', source_created_at) = ?", Date.parse(options[:date])])
+          .all
+    end
     
     def self.active_dates(options={})
       query = "SELECT date_trunc('day', source_created_at) AS pdate FROM posts"
@@ -75,13 +83,6 @@ module NavelGazer
       query_array = [query, options[:since], options[:before], limit].compact!
       post_data = ActiveRecord::Base.raw_query_flat(query_array)
       post_data.collect{|d| d['pdate']}.sort{|a,b| b <=> a}
-    end
-    
-    def self.for_account_and_day(options={})
-      Post.includes(:linked_account, :photos)
-          .where(:linked_account_id => options[:linked_account_id].to_i)
-          .where(["date_trunc('day', source_created_at) = ?", Date.parse(options[:date])])
-          .all
     end
   
     # Switch to STI?
