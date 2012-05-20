@@ -11,7 +11,7 @@ module NavelGazer
       options ||= {}
       if !options.has_key?(:since_id) && !options.has_key?(:before_id)
         last_post = posts.last
-        options[:from] = last_post.source_id if last_post
+        options[:to] = last_post.source_id if last_post
       end
       options[:from] = options[:since_id] if options.has_key? :since_id
       options[:to] = options[:before_id] if options.has_key? :before_id
@@ -25,6 +25,9 @@ module NavelGazer
     def parse_data data
       response = []
 
+      # perhaps this user has no scrobbles this week?
+      return nil if !data['lfm']['weeklyartistchart']['artist']
+
       # create post content
       post_content = ''
       for artist in data['lfm']['weeklyartistchart']['artist'][0...4] do
@@ -37,7 +40,7 @@ module NavelGazer
       post_content = "<ol>Top Artists (#{from_date_string} - #{to_date_string}):<br/> #{post_content}</ol>"
 
       # save post in db
-      post = posts.find_or_create_by_source_id(:source_id => data['lfm']['weeklyartistchart']['from'].to_s)
+      post = posts.find_or_create_by_source_id(:source_id => data['lfm']['weeklyartistchart']['to'].to_s)
       post.update_attributes!(
           :permalink => "http://www.last.fm/user/#{app_user_id}/charts?charttype=weekly&subtype=artist" +
                         "&range=#{data['lfm']['weeklyartistchart']['from']}-#{data['lfm']['weeklyartistchart']['to']}",
