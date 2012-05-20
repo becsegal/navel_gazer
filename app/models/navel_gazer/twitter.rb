@@ -1,6 +1,7 @@
 module NavelGazer
   class Twitter < LinkedAccount
     include LetMeIn::LinkedAccounts::TwitterAccount
+    include ActionView::Helpers::TextHelper
     
     DEV_URL = "https://dev.twitter.com/apps"
     API_URL = "https://api.twitter.com/1"

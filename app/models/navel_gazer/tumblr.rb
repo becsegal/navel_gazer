@@ -7,6 +7,7 @@ module NavelGazer
     PROVIDER_NAME = "Tumblr"
     PROVIDER_URL = "http://www.tumblr.com"
     MIN_IMAGE_WIDTH = 250
+    VIDEO_WIDTH = 400;
 
     def import options={}
       return nil if token.nil?
@@ -85,8 +86,8 @@ module NavelGazer
             :html => item['player'])
         when 'photo'
           if item['photos'] 
-            sizes = item['photos'][0]['alt_sizes'].sort! { |a,b| b['width'].to_i <=> a['width'].to_i } 
-            sizes = sizes.select { |a| a['width'].to_i >= MIN_IMAGE_WIDTH }
+            sizes = item['photos'][0]['alt_sizes'].sort! { |a,b| a['width'].to_i <=> b['width'].to_i } 
+            sizes = sizes.select { |a| a['width'].to_i > MIN_IMAGE_WIDTH }
                
             media = Media.find_or_create_by_post_id(:post_id => post.id)
             media.update_attributes(
@@ -96,16 +97,19 @@ module NavelGazer
               :author_url => url,
               :provider_name => PROVIDER_NAME,
               :provider_url => PROVIDER_URL,
-              :thumbnail_url => sizes.last['url'],
-              :thumbnail_width => sizes.last['width'],
-              :thumbnail_height => sizes.last['height'],
+              :thumbnail_url => sizes.first['url'],
+              :thumbnail_width => sizes.first['width'],
+              :thumbnail_height => sizes.first['height'],
               :description => item['photos'][0]['caption'],
               :url => item['photos'][0]['original_size']['url'],
               :width => item['photos'][0]['original_size']['width'],
               :height => item['photos'][0]['original_size']['height'],
-              :html => sizes.last['url'])
+              :html => sizes.first['url'])
           end
         when 'video'
+          player = item['player'].select { |a| a['width'].to_i == VIDEO_WIDTH }
+          player = item['player'][0] if player.nil?
+
           media = Media.find_or_create_by_post_id(:post_id => post.id)
           media.update_attributes(
             :post_id => post.id,
@@ -114,7 +118,7 @@ module NavelGazer
             :author_url => url,
             :provider_name => PROVIDER_NAME,
             :provider_url => PROVIDER_URL,
-            :html => item['player'][0]['embed_code'])
+            :html => player.first['embed_code'])
       end  
     end
 
