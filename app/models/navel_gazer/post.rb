@@ -64,7 +64,7 @@ module NavelGazer
           count = post_data.select{|pd| pd['id'].to_i == p.id}[0]['count'].to_i - 1
           entry[:accounts] << { :type => p.linked_account.class.short_name.downcase, 
                                 :linked_account_id => p.linked_account.id,
-                                :posts => p, 
+                                :posts => [p], 
                                 :additional_count => count}
         end
         posts_by_date << entry
