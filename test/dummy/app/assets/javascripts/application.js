@@ -6,4 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require handlebars.runtime
+//= require ./lib/underscore
+//= require_tree ./lib
 //= require_tree .

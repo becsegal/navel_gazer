@@ -23,12 +23,11 @@ gem 'omniauth-foursquare'
 gem 'omniauth-tumblr'
 gem 'omniauth-lastfm'
 
-#gem 'let_me_in', :git => 'git@github.com:becarella/let_me_in.git'
-gem 'let_me_in', :path => '../let_me_in'
+gem 'let_me_in', :git => 'git@github.com:becarella/let_me_in.git'
 gem 'render_or_redirect', :git => 'git@github.com:becarella/render_or_redirect.git'
 
 gem 'hbs'
-gem 'handlebars_assets' #, :git => 'git://github.com/goggin13/handlebars_assets'
+gem 'handlebars_assets', :git => 'git://github.com/goggin13/handlebars_assets'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
