@@ -1,6 +1,6 @@
 module Finders
   
-  DEFAULT_LIMIT = 2
+  DEFAULT_LIMIT = 20
 
   def raw_query(query_array) 
     sanitized_query = ActiveRecord::Base.send(:sanitize_sql_array, query_array)
