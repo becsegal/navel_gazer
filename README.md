@@ -10,8 +10,7 @@ Include navel_gazer in the Gemfile
   gem 'omniauth-twitter', '0.0.8'
   gem 'omniauth-banters', :git => "git://github.com/becarella/omniauth-banters.git"
 
-  gem 'hbs'
-  gem 'handlebars_assets'
+  gem 'handlebars_wax', :git => "git://github.com/goggin13/handlebars_wax.git"
 
   gem "render_or_redirect", :git => 'git@github.com:becarella/render_or_redirect.git'
   gem 'let_me_in', :git => 'git@github.com:becarella/let_me_in.git'

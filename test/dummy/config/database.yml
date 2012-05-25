@@ -5,7 +5,7 @@
 #   gem 'sqlite3'
 development:
   adapter: postgresql
-  database: lifelogline
+  database: navel_gazer
   username: postgres
   password: postgres
   host: localhost

@@ -1,9 +1,5 @@
 <div id="posts" class='thumbnails'>
   <div class='post about_post'><%= about %></div>
-  <%= render :partial => 'posts/posts.jst', :locals => {:hbs =>  {:data => @data.as_json } } %>
+  <%= render :partial => 'posts/ng_posts', :locals => {:data => @data.as_json } %>
 </div>
 <div class='clear' />
-
-<pre>
-  <%= JSON.pretty_generate({:data => @data.as_json }) %>
-</pre>

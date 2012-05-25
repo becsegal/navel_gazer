@@ -1,7 +1,6 @@
 
 jQuery ->
   
-  console.debug "navel_gazer init"
   $("#posts").on 'error', 'img', (event) -> $(event.target).detach()
   
   $("#posts").on 'click', '.post', (event) ->
@@ -29,7 +28,7 @@ jQuery ->
           # load posts into intermediate invisible div to wait for images
           $("#posts").after("<div id='staging'>")
           $staging = $("#staging")
-          $staging.html($(JST['posts/_ngposts'](data)))
+          $staging.html($(JST['posts/_ng_posts'](data)))
           $staging.imagesLoaded ->
             $new_posts = $($staging.html())
             $staging.detach()
