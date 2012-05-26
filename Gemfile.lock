@@ -1,5 +1,5 @@
 GIT
-  remote: ../let_me_in
+  remote: git://github.com/becarella/let_me_in.git
   revision: 53eb88fccbdadbf37fdf8d66d0c349edadb4b739
   specs:
     let_me_in (0.0.1)

@@ -9,3 +9,8 @@
 //= require ./lib/underscore
 //= require_tree ./lib
 //= require_tree .
+
+
+$(document).ready(function() {
+  Backbone.history.start({pushState: true}); 
+});
